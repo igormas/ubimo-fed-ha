@@ -4,8 +4,14 @@
     "noImplicitAny": true,
     "module": "commonjs",
     "moduleResolution": "node",
-    "target": "es5",
-    "sourceMap": true,
+    "target": "es2015",
+    "sourceMap": false,
     "declaration": true
-  }
+  },
+  "include":[
+    "./src/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
