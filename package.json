@@ -2,7 +2,7 @@
   "name": "ubimo-fed-home-assigment",
   "version": "1.0.0",
   "description": "Front End Candidates home assigment",
-  "main": "./dist/app.bundle.js",
+  "main": "./dist/index.js",
   "types": "./dist/src/index.d.ts",
   "author": "Ubimo",
   "license": "MIT",

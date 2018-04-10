@@ -4,11 +4,8 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
     mode: "development",
-    entry: {
-        app: './src/index.ts',
-        test: './test/test.ts'
-    },
-    devtool: 'inline-source-map',
+    entry:'./src/ad-emitter.ts',
+    devtool: 'source-map',
     module: {
         rules: [
             {
@@ -25,7 +22,7 @@ module.exports = {
         extensions: ['.tsx', '.ts', '.js']
     },
     output: {
-        filename: '[name].bundle.js',
+        filename: 'index.js',
         path: path.resolve(__dirname, 'dist')
     },
     plugins: [
