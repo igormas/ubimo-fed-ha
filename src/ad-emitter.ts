@@ -71,3 +71,5 @@ export class AdEmitter {
         };
     }
 }
+
+export const adDispatcher = new AdEmitter();
