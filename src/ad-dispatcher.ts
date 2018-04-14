@@ -47,14 +47,9 @@ function initFirebase(): void {
 
 export class AdDispatcher {
     private _adDispatcher$ = new Subject<IAdEvent>();
-    private firebaseApp = initFirebase();
 
     constructor() {
         this.startEmissions();
-        firebase.storage().ref().getMetadata().then((res) => {
-            debugger;
-        });
-        debugger;
     }
 
     private getRandomAd(): IAdEvent {

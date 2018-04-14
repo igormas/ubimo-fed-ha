@@ -33,12 +33,7 @@ function initFirebase() {
 class AdDispatcher {
     constructor() {
         this._adDispatcher$ = new Subject_1.Subject();
-        this.firebaseApp = initFirebase();
         this.startEmissions();
-        firebase.storage().ref().getMetadata().then((res) => {
-            debugger;
-        });
-        debugger;
     }
     getRandomAd() {
         const isRandomImage = Math.random() > 0.5;
