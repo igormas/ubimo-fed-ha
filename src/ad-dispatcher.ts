@@ -25,6 +25,22 @@ const IMAGE_CREATIVES: ICreative [] = [
     }, {
         name: 'Heinz',
         url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/images%2Fheinz.jpg?alt=media&token=1557704e-7666-4ace-83cb-8367e2d16d84'
+    },
+    {
+        name: 'Hellmanns',
+        url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/images%2Fhellmanns.jpg?alt=media&token=707800b5-5f4e-436c-8aad-72a17b945994'
+    }, {
+        name: 'Hubspot',
+        url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/images%2Fhubspot.jpg?alt=media&token=2a33ef53-6b67-4002-a96d-9ff2341bd694'
+    }, {
+        name: 'Lotus',
+        url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/images%2Flotus.jpg?alt=media&token=0abd398c-8dae-43e3-b259-822ec0bf7cec'
+    }, {
+        name: 'Mcdonald\'s',
+        url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/images%2Fmcdonalds.jpg?alt=media&token=15676f70-6b23-4a4f-ace3-c97d5517f7d2'
+    }, {
+        name: 'Super Skunk',
+        url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/images%2Fsuper-skunk.jpg?alt=media&token=dd34a431-c156-42f1-b40e-45a9d1e55d6f'
     }
 ];
 
@@ -67,7 +83,7 @@ export class AdDispatcher {
 
     private startEmissions(): void {
         of(null).expand(() => {
-            const randomDelay = Math.round(Math.random() * 5000);
+            const randomDelay = 3000 + Math.round(Math.random() * 5000);
             return of(this.getRandomAd())
                 .delay(randomDelay);
         })
