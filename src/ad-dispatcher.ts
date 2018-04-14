@@ -3,7 +3,6 @@ import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import 'rxjs/add/operator/expand';
 import 'rxjs/add/operator/delay';
-import * as firebase from 'firebase';
 
 export interface ICreative {
     name: string;
@@ -44,47 +43,70 @@ const IMAGE_CREATIVES: ICreative [] = [
     }
 ];
 
-function initFirebase(): void {
-
-    if (firebase.apps.length) {
-        return;
+const VIDEOS_CREATIVES: ICreative[] = [
+    {
+        name: 'Baby me',
+        url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/videos%2Fbaby_me.mp4?alt=media&token=a147d2bb-32dd-4e6e-9b06-08c425f772b7'
+    },
+    {
+        name: 'Bud.TV',
+        url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/videos%2Fbud-tv.mp4?alt=media&token=28e72095-13da-416e-b13c-4f5cbbfee6d9'
+    },
+    {
+        name: 'Captain Morgan',
+        url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/videos%2Fcaptain_morgan.mp4?alt=media&token=f5678986-7e10-42d4-89d8-c54d394836c9'
+    }, {
+        name: 'Crazy kid',
+        url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/videos%2Fcrazy_kid.mp4?alt=media&token=b916272b-8b74-485e-bb42-e150e5d91a11'
+    }, {
+        name: 'Ikea',
+        url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/videos%2Fikea.mp4?alt=media&token=512402b7-07ca-4059-93c2-4256b6adcebe'
+    }, {
+        name: 'Shopping',
+        url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/videos%2Fshopping.mp4?alt=media&token=7c42c66a-b676-43f5-9714-ef98096e7253'
+    }, {
+        name: 'Yes Iran',
+        url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/videos%2Fyes_iran.mp4?alt=media&token=2ba43a2b-e077-4c9c-9930-84e8c63c8c6c'
+    }, {
+        name: 'Yes Russian mafia',
+        url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/videos%2Fyes_russian_mafia.mp4?alt=media&token=0c2b2c21-a960-4440-8722-83a19afeef07'
     }
+];
 
-    // Initialize Firebase
-    const config = {
-        apiKey: "AIzaSyDO5Xn5hJmsHPbxN5hV_Ys3ARx3Pvqbhxs",
-        authDomain: "ubimo-home-assignment.firebaseapp.com",
-        databaseURL: "https://ubimo-home-assignment.firebaseio.com",
-        storageBucket: "ubimo-home-assignment.appspot.com",
-    };
-    firebase.initializeApp(config);
-
+function raffleCreative(creativesArr: ICreative[]): ICreative {
+    const randomImageCreativeIndex = Math.floor(Math.random() * creativesArr.length);
+    return creativesArr.splice(randomImageCreativeIndex, 1)[0];
 }
 
 export class AdDispatcher {
     private _adDispatcher$ = new Subject<IAdEvent>();
     private imagesCreatives: ICreative[] = [];
+    private videoCreatives: ICreative[] = [];
 
     constructor() {
         this.startEmissions();
     }
 
     private getRandomAd(): IAdEvent {
-        const isRandomImage = Math.random() > 0.5;
+        let type: IAdEvent['type'] = Math.random() > 0.5 ? 'IMAGE' : 'VIDEO';
+        let creative: ICreative;
 
-        if (true || isRandomImage) { // todo
+        if (type === 'IMAGE') {
             if (!this.imagesCreatives.length) {
                 this.imagesCreatives = [...IMAGE_CREATIVES];
             }
-
-            const randomImageCreativeIndex = Math.floor(Math.random() * this.imagesCreatives.length);
-            const randomImageCreative = this.imagesCreatives.splice(randomImageCreativeIndex,1)[0];
-
-            return {
-                type: 'IMAGE',
-                creative: randomImageCreative
-            };
+            creative = raffleCreative(this.imagesCreatives);
+        } else {
+            if (!this.videoCreatives.length) {
+                this.videoCreatives = [...VIDEOS_CREATIVES];
+            }
+            creative = raffleCreative(this.videoCreatives);
         }
+
+        return {
+            type,
+            creative
+        };
     }
 
     private startEmissions(): void {
