@@ -6,14 +6,14 @@ export interface IAdEvent {
     src: string;
     name: string;
 }
-export declare class AdEmitter {
-    private _adEmitter$;
+export declare class AdDispatcher {
+    private _adDispatcher$;
     constructor();
-    private getRandomAdd();
+    private getRandomAd();
     private startEmissions();
-    readonly adEmitter$: Observable<IAdEvent>;
+    readonly adDispatcher$: Observable<IAdEvent>;
     registerToAdEvents(cb: (adEvent: IAdEvent) => void): {
         removeListener: () => void;
     };
 }
-export declare const adDispatcher: AdEmitter;
+export declare const adDispatcher: AdDispatcher;

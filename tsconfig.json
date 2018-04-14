@@ -1,14 +1,18 @@
 {
   "compilerOptions": {
-    "outDir": "",
+    "outDir": "dist",
     "noImplicitAny": true,
     "module": "commonjs",
     "moduleResolution": "node",
     "target": "es2015",
     "sourceMap": false,
-    "declaration": true
+    "declaration": true,
+    "lib": [
+      "es5",
+      "es2015"
+    ]
   },
-  "include":[
+  "include": [
     "./src/*"
   ],
   "exclude": [
