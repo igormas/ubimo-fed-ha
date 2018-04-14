@@ -49,13 +49,17 @@ function initFirebase() {
 class AdDispatcher {
     constructor() {
         this._adDispatcher$ = new Subject_1.Subject();
+        this.imagesCreatives = [];
         this.startEmissions();
     }
     getRandomAd() {
         const isRandomImage = Math.random() > 0.5;
         if (true || isRandomImage) { // todo
-            const randomImageCreativeIndex = Math.floor(Math.random() * IMAGE_CREATIVES.length);
-            const randomImageCreative = IMAGE_CREATIVES[randomImageCreativeIndex];
+            if (!this.imagesCreatives.length) {
+                this.imagesCreatives = [...IMAGE_CREATIVES];
+            }
+            const randomImageCreativeIndex = Math.floor(Math.random() * this.imagesCreatives.length);
+            const randomImageCreative = this.imagesCreatives.splice(randomImageCreativeIndex, 1)[0];
             return {
                 type: 'IMAGE',
                 creative: randomImageCreative
