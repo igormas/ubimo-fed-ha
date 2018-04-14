@@ -1,7 +1,7 @@
 # ubimo-fed-ha
 This library expose an Ad dispatcher service.
 
-Ad event interface: \n
+Ad event interface: 
   type: 'IMAGE' or 'VIDEO',
   creative: {
     name: creative name.
