@@ -12,6 +12,7 @@ export interface IAdEvent {
 export declare class AdDispatcher {
     private _adDispatcher$;
     private imagesCreatives;
+    private videoCreatives;
     constructor();
     private getRandomAd();
     private startEmissions();
