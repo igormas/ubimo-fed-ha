@@ -1,4 +1,4 @@
-# ubimo-fed-ha
+# ubimo front end home assignment
 This library expose an Ad dispatcher service.
 
 ## Ad event interface:
