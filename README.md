@@ -2,7 +2,7 @@
 This library expose an Ad dispatcher service.
 
 Ad event interface: 
-  type: 'IMAGE' or 'VIDEO',
+  type: 'IMAGE' or  'VIDEO',
   creative: {
     name: creative name.
     url: media url
