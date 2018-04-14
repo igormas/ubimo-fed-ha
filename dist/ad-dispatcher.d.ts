@@ -1,10 +1,13 @@
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/expand';
 import 'rxjs/add/operator/delay';
+export interface ICreative {
+    name: string;
+    url: string;
+}
 export interface IAdEvent {
     type: 'IMAGE' | 'VIDEO';
-    src: string;
-    name: string;
+    creative: ICreative;
 }
 export declare class AdDispatcher {
     private _adDispatcher$;
