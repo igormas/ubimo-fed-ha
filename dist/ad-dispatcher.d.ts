@@ -8,6 +8,7 @@ export interface IAdEvent {
 }
 export declare class AdDispatcher {
     private _adDispatcher$;
+    private firebaseApp;
     constructor();
     private getRandomAd();
     private startEmissions();

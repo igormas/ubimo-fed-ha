@@ -5,11 +5,12 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "target": "es2015",
-    "sourceMap": false,
+    "sourceMap": true,
     "declaration": true,
     "lib": [
       "es5",
-      "es2015"
+      "es2015",
+      "dom"
     ]
   },
   "include": [

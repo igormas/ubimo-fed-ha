@@ -1,8 +1,9 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     mode: "development",
-    entry:'./src/ad-emitter.ts',
+    entry:'./test/test.ts',
     module: {
         rules: [
             {
@@ -13,15 +14,16 @@ module.exports = {
         ]
     },
     devServer: {
-        contentBase: ['./dist']
+        contentBase: ['./temp']
     },
     resolve: {
         extensions: ['.tsx', '.ts', '.js']
     },
     output: {
-        filename: 'ad-emitter.js',
-        path: path.resolve(__dirname, 'dist')
+        filename: '[name].js',
+        path: path.resolve(__dirname, 'temp')
     },
     plugins: [
+        new HtmlWebpackPlugin()
     ]
 };
