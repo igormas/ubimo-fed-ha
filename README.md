@@ -12,4 +12,5 @@ This library expose an Ad dispatcher service.
 
 ## Ad Dispatcher service API
   adDispatcher$: Stream which dispatch ad event.
-  registerToAdEvents: the provided function will be invoked the dispatched ad event.
+  registerToAdEvents: function which except a callback as input, the callback is invoked each time the service dispatch an ad   
+  event.
