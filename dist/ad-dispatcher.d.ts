@@ -7,6 +7,10 @@ export interface ICreative {
 }
 export interface IAdEvent {
     type: 'IMAGE' | 'VIDEO';
+    coordinate: {
+        x: number;
+        y: number;
+    };
     creative: ICreative;
 }
 export declare class AdDispatcher {
