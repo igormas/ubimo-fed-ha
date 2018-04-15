@@ -11,7 +11,7 @@ export interface ICreative {
 
 export interface IAdEvent {
     type: 'IMAGE' | 'VIDEO';
-    coordinate: {
+    coordinates: {
         x: number;
         y: number;
     },
@@ -74,7 +74,7 @@ const VIDEOS_CREATIVES: ICreative[] = [
 const MAP_WIDTH = 1280;
 const MAP_HEIGHT = 1887;
 
-function generateRandomCoordinate(): IAdEvent['coordinate'] {
+function generateRandomCoordinate(): IAdEvent['coordinates'] {
     return {
         x: Math.round(Math.random() * MAP_WIDTH),
         y: Math.round(Math.random() * MAP_HEIGHT),
@@ -114,7 +114,7 @@ export class AdDispatcher {
         return {
             type,
             creative,
-            coordinate: generateRandomCoordinate()
+            coordinates: generateRandomCoordinate()
         };
     }
 
