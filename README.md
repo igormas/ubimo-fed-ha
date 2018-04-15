@@ -4,7 +4,7 @@ This library expose an Ad dispatcher service.
 ## Ad event interface:
 
  - type: 'IMAGE' or  'VIDEO',
-  - coordinate: {
+  - coordinates: {
     x: number between 0 - 1280;
     y: number between 0 - 1887;
   }
