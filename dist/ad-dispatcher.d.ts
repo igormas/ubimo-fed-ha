@@ -1,13 +1,14 @@
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/expand';
 import 'rxjs/add/operator/delay';
+import 'rxjs/add/operator/take';
 export interface ICreative {
     name: string;
     url: string;
 }
 export interface IAdEvent {
     type: 'IMAGE' | 'VIDEO';
-    coordinate: {
+    coordinates: {
         x: number;
         y: number;
     };

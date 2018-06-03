@@ -4,6 +4,7 @@ const Subject_1 = require("rxjs/Subject");
 const of_1 = require("rxjs/observable/of");
 require("rxjs/add/operator/expand");
 require("rxjs/add/operator/delay");
+require("rxjs/add/operator/take");
 const IMAGE_CREATIVES = [
     {
         name: 'Bad breath',
@@ -29,10 +30,10 @@ const IMAGE_CREATIVES = [
     }
 ];
 const VIDEOS_CREATIVES = [
-    {
-        name: 'Baby me',
-        url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/videos%2Fbaby_me.mp4?alt=media&token=a147d2bb-32dd-4e6e-9b06-08c425f772b7'
-    },
+    /*  {
+     name: 'Baby me',
+     url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/videos%2Fbaby_me.mp4?alt=media&token=a147d2bb-32dd-4e6e-9b06-08c425f772b7'
+     },*/
     {
         name: 'Bud.TV',
         url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/videos%2Fbud-tv.mp4?alt=media&token=28e72095-13da-416e-b13c-4f5cbbfee6d9'
@@ -43,16 +44,16 @@ const VIDEOS_CREATIVES = [
     }, {
         name: 'Crazy kid',
         url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/videos%2Fcrazy_kid.mp4?alt=media&token=b916272b-8b74-485e-bb42-e150e5d91a11'
-    }, {
+    } /*, {
         name: 'Ikea',
         url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/videos%2Fikea.mp4?alt=media&token=512402b7-07ca-4059-93c2-4256b6adcebe'
-    }, {
+    }*/ /*, {
         name: 'Yes Iran',
         url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/videos%2Fyes_iran.mp4?alt=media&token=2ba43a2b-e077-4c9c-9930-84e8c63c8c6c'
-    }, {
-        name: 'Yes Russian mafia',
-        url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/videos%2Fyes_russian_mafia.mp4?alt=media&token=0c2b2c21-a960-4440-8722-83a19afeef07'
-    }
+    }*/ /*, {
+     name: 'Yes Russian mafia',
+     url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/videos%2Fyes_russian_mafia.mp4?alt=media&token=0c2b2c21-a960-4440-8722-83a19afeef07'
+     }*/
 ];
 const MAP_WIDTH = 1280;
 const MAP_HEIGHT = 1887;
@@ -74,7 +75,7 @@ class AdDispatcher {
         this.startEmissions();
     }
     getRandomAd() {
-        let type = Math.random() > 0.5 ? 'IMAGE' : 'VIDEO';
+        let type = Math.random() > 0.2 ? 'IMAGE' : 'VIDEO';
         let creative;
         if (type === 'IMAGE') {
             if (!this.imagesCreatives.length) {
@@ -91,15 +92,17 @@ class AdDispatcher {
         return {
             type,
             creative,
-            coordinate: generateRandomCoordinate()
+            coordinates: generateRandomCoordinate()
         };
     }
     startEmissions() {
-        of_1.of(null).expand(() => {
+        of_1.of(null)
+            .expand(() => {
             const randomDelay = 3000 + Math.round(Math.random() * 5000);
             return of_1.of(this.getRandomAd())
                 .delay(randomDelay);
         })
+            .take(20)
             .subscribe((adEvent) => {
             this._adDispatcher$.next(adEvent);
         });
