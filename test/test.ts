@@ -1,12 +1,13 @@
-import { AdDispatcher } from './../src/ad-dispatcher';
+import {
+    adDispatcher,
+    IAdEvent
+} from './../src/ad-dispatcher';
 
-const dispatcher = new AdDispatcher();
-
-dispatcher.registerToAdEvents((evt) => {
+adDispatcher.registerToAdEvents((evt) => {
     console.log('callback', evt);
 });
 
-dispatcher.adDispatcher$
-    .subscribe((evt) => {
+adDispatcher.adEvents$
+    .subscribe((evt: IAdEvent) => {
         console.log('stream', evt);
     });

@@ -88,7 +88,7 @@ function raffleCreative(creativesArr: ICreative[]): ICreative {
 }
 
 export class AdDispatcher {
-    private _adDispatcher$ = new Subject<IAdEvent>();
+    private _adEvents$ = new Subject<IAdEvent>();
     private imagesCreatives: ICreative[] = [];
     private videoCreatives: ICreative[] = [];
 
@@ -128,17 +128,17 @@ export class AdDispatcher {
             })
             .take(20)
             .subscribe((adEvent) => {
-                this._adDispatcher$.next(adEvent);
+                this._adEvents$.next(adEvent);
             });
     }
 
-    get adDispatcher$(): Observable<IAdEvent> {
-        return this._adDispatcher$.asObservable();
+    get adEvents$(): Observable<IAdEvent> {
+        return this._adEvents$.asObservable();
     }
 
     registerToAdEvents(cb: (adEvent: IAdEvent) => void): { removeListener: () => void } {
-        const sub = this.adDispatcher$
-            .subscribe((evt) => {
+        const sub = this.adEvents$
+            .subscribe((evt: IAdEvent) => {
                 cb(evt);
             });
 

@@ -18,3 +18,8 @@ This library expose an Ad dispatcher service.
 ## Ad Dispatcher service API
   - adDispatcher$: Stream which dispatch ad event.
   - registerToAdEvents: function which except a callback as input, the callback is invoked each time the service dispatch<br/> an ad event.
+
+
+## Import instructions:
+ - add ubimo-ad-dispatcher: "https://github.com/igormas/ubimo-fed-ha#master" dependency to package.json
+ - import the ad service as es6 module ( import {adDispatcher} from 'ubimo-ad-dispatcher'); 

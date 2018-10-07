@@ -69,7 +69,7 @@ function raffleCreative(creativesArr) {
 }
 class AdDispatcher {
     constructor() {
-        this._adDispatcher$ = new Subject_1.Subject();
+        this._adEvents$ = new Subject_1.Subject();
         this.imagesCreatives = [];
         this.videoCreatives = [];
         this.startEmissions();
@@ -104,14 +104,14 @@ class AdDispatcher {
         })
             .take(20)
             .subscribe((adEvent) => {
-            this._adDispatcher$.next(adEvent);
+            this._adEvents$.next(adEvent);
         });
     }
-    get adDispatcher$() {
-        return this._adDispatcher$.asObservable();
+    get adEvents$() {
+        return this._adEvents$.asObservable();
     }
     registerToAdEvents(cb) {
-        const sub = this.adDispatcher$
+        const sub = this.adEvents$
             .subscribe((evt) => {
             cb(evt);
         });
