@@ -19,8 +19,8 @@ export declare class AdDispatcher {
     private imagesCreatives;
     private videoCreatives;
     constructor();
-    private getRandomAd();
-    private startEmissions();
+    private getRandomAd;
+    private startEmissions;
     readonly adEvents$: Observable<IAdEvent>;
     registerToAdEvents(cb: (adEvent: IAdEvent) => void): {
         removeListener: () => void;
