@@ -1,11 +1,18 @@
 "use strict";
+var __spreadArrays = (this && this.__spreadArrays) || function () {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const Subject_1 = require("rxjs/Subject");
-const of_1 = require("rxjs/observable/of");
+var Subject_1 = require("rxjs/Subject");
+var of_1 = require("rxjs/observable/of");
 require("rxjs/add/operator/expand");
 require("rxjs/add/operator/delay");
 require("rxjs/add/operator/take");
-const IMAGE_CREATIVES = [
+var IMAGE_CREATIVES = [
     {
         name: 'Bad breath',
         url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/images%2Fbad-breath.jpeg?alt=media&token=3db2a043-49c9-45fb-86e9-f272659d8b35'
@@ -29,7 +36,7 @@ const IMAGE_CREATIVES = [
         url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/images%2Fray_ban.jpg?alt=media&token=65c9f096-c24c-44c3-b7e0-480a6938e740'
     }
 ];
-const VIDEOS_CREATIVES = [
+var VIDEOS_CREATIVES = [
     /*  {
      name: 'Baby me',
      url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/videos%2Fbaby_me.mp4?alt=media&token=a147d2bb-32dd-4e6e-9b06-08c425f772b7'
@@ -55,8 +62,8 @@ const VIDEOS_CREATIVES = [
     url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/videos%2Fyes_russian_mafia.mp4?alt=media&token=0c2b2c21-a960-4440-8722-83a19afeef07'
     }*/
 ];
-const MAP_WIDTH = 1280;
-const MAP_HEIGHT = 1887;
+var MAP_WIDTH = 1280;
+var MAP_HEIGHT = 1887;
 function generateRandomCoordinate() {
     return {
         x: Math.round(Math.random() * MAP_WIDTH),
@@ -64,64 +71,64 @@ function generateRandomCoordinate() {
     };
 }
 function raffleCreative(creativesArr) {
-    const randomImageCreativeIndex = Math.floor(Math.random() * creativesArr.length);
+    var randomImageCreativeIndex = Math.floor(Math.random() * creativesArr.length);
     return creativesArr.splice(randomImageCreativeIndex, 1)[0];
 }
-class AdDispatcher {
-    constructor() {
+var AdDispatcher = /** @class */ (function () {
+    function AdDispatcher() {
         this._adEvents$ = new Subject_1.Subject();
         this.imagesCreatives = [];
         this.videoCreatives = [];
+        this.adEvents$ = this._adEvents$.asObservable();
         this.startEmissions();
     }
-    getRandomAd() {
-        const type = Math.random() > 0.2 ? 'IMAGE' : 'VIDEO';
-        let creative;
+    AdDispatcher.prototype.getRandomAd = function () {
+        var type = Math.random() > 0.2 ? 'IMAGE' : 'VIDEO';
+        var creative;
         if (type === 'IMAGE') {
             if (!this.imagesCreatives.length) {
-                this.imagesCreatives = [...IMAGE_CREATIVES];
+                this.imagesCreatives = __spreadArrays(IMAGE_CREATIVES);
             }
             creative = raffleCreative(this.imagesCreatives);
         }
         else {
             if (!this.videoCreatives.length) {
-                this.videoCreatives = [...VIDEOS_CREATIVES];
+                this.videoCreatives = __spreadArrays(VIDEOS_CREATIVES);
             }
             creative = raffleCreative(this.videoCreatives);
         }
         return {
-            type,
-            creative,
+            type: type,
+            creative: creative,
             coordinates: generateRandomCoordinate()
         };
-    }
-    startEmissions() {
+    };
+    AdDispatcher.prototype.startEmissions = function () {
+        var _this = this;
         of_1.of(null)
-            .expand(() => {
-            const randomDelay = 3000 + Math.round(Math.random() * 5000);
-            return of_1.of(this.getRandomAd())
+            .expand(function () {
+            var randomDelay = 3000 + Math.round(Math.random() * 5000);
+            return of_1.of(_this.getRandomAd())
                 .delay(randomDelay);
         })
             .take(20)
-            .subscribe((adEvent) => {
-            this._adEvents$.next(adEvent);
+            .subscribe(function (adEvent) {
+            _this._adEvents$.next(adEvent);
         });
-    }
-    get adEvents$() {
-        return this._adEvents$.asObservable();
-    }
-    registerToAdEvents(cb) {
-        const sub = this.adEvents$
-            .subscribe((evt) => {
+    };
+    AdDispatcher.prototype.registerToAdEvents = function (cb) {
+        var sub = this.adEvents$
+            .subscribe(function (evt) {
             cb(evt);
         });
         return {
-            removeListener: () => {
+            removeListener: function () {
                 sub.unsubscribe();
             }
         };
-    }
-}
+    };
+    return AdDispatcher;
+}());
 exports.AdDispatcher = AdDispatcher;
 exports.adDispatcher = new AdDispatcher();
 //# sourceMappingURL=ad-dispatcher.js.map

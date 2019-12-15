@@ -92,6 +92,8 @@ export class AdDispatcher {
     private imagesCreatives: ICreative[] = [];
     private videoCreatives: ICreative[] = [];
 
+    adEvents$: Observable<IAdEvent> = this._adEvents$.asObservable();
+
     constructor() {
         this.startEmissions();
     }
@@ -130,10 +132,6 @@ export class AdDispatcher {
             .subscribe((adEvent) => {
                 this._adEvents$.next(adEvent);
             });
-    }
-
-    get adEvents$(): Observable<IAdEvent> {
-        return this._adEvents$.asObservable();
     }
 
     registerToAdEvents(cb: (adEvent: IAdEvent) => void): { removeListener: () => void } {
