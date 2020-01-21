@@ -14,16 +14,10 @@ export interface IAdEvent {
     };
     creative: ICreative;
 }
-export declare class AdDispatcher {
-    private _adEvents$;
-    private imagesCreatives;
-    private videoCreatives;
+export interface IAdDispatcher {
     adEvents$: Observable<IAdEvent>;
-    constructor();
-    private getRandomAd;
-    private startEmissions;
     registerToAdEvents(cb: (adEvent: IAdEvent) => void): {
         removeListener: () => void;
     };
 }
-export declare const adDispatcher: AdDispatcher;
+export declare const adDispatcher: IAdDispatcher;

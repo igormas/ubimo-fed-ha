@@ -129,6 +129,5 @@ var AdDispatcher = /** @class */ (function () {
     };
     return AdDispatcher;
 }());
-exports.AdDispatcher = AdDispatcher;
 exports.adDispatcher = new AdDispatcher();
 //# sourceMappingURL=ad-dispatcher.js.map
