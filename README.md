@@ -21,5 +21,5 @@ This library expose an Ad dispatcher service.
 
 
 ## Import instructions:
- - add ubimo-ad-dispatcher: "https://github.com/igormas/ubimo-fed-ha#master" dependency to package.json
+ - add `"ubimo-ad-dispatcher": "https://github.com/igormas/ubimo-fed-ha#master"` row to package.json
  - import the ad service as es6 module ( import {adDispatcher} from 'ubimo-ad-dispatcher'); 
