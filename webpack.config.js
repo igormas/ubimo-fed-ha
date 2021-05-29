@@ -24,6 +24,8 @@ module.exports = {
         path: path.resolve(__dirname, 'temp')
     },
     plugins: [
-        new HtmlWebpackPlugin()
+        new HtmlWebpackPlugin({
+            template: 'test/index.html'
+        })
     ]
 };

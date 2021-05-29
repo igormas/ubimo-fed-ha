@@ -1,9 +1,13 @@
-import { Subject } from 'rxjs/Subject';
-import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
-import 'rxjs/add/operator/expand';
-import 'rxjs/add/operator/delay';
-import 'rxjs/add/operator/take';
+import {
+  Observable,
+  Subject,
+  of,
+} from 'rxjs';
+import {
+  expand,
+  take,
+  delay,
+} from 'rxjs/operators';
 
 export interface ICreative {
   name: string;
@@ -28,27 +32,27 @@ export interface IAdDispatcher {
 const IMAGE_CREATIVES: ICreative [] = [
   {
     name: 'Bad breath',
-    url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/images%2Fbad-breath.jpeg?alt=media&token=3db2a043-49c9-45fb-86e9-f272659d8b35'
+    url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/images%2Fbad-breath.jpeg?alt=media&token=3db2a043-49c9-45fb-86e9-f272659d8b35',
   }, {
     name: 'Cepera',
-    url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/images%2Fcepera.jpg?alt=media&token=9abbe371-e37b-45f6-b951-a1aadce68f03'
+    url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/images%2Fcepera.jpg?alt=media&token=9abbe371-e37b-45f6-b951-a1aadce68f03',
   }, {
     name: 'Eat more chicken',
-    url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/images%2Feat_more_chicken.jpeg?alt=media&token=ce05f9a2-5727-4076-a5ab-2f64cef80979'
+    url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/images%2Feat_more_chicken.jpeg?alt=media&token=ce05f9a2-5727-4076-a5ab-2f64cef80979',
   }, {
     name: 'McDonal\'s',
-    url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/images%2Fmcdonalds.jpg?alt=media&token=15676f70-6b23-4a4f-ace3-c97d5517f7d2'
+    url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/images%2Fmcdonalds.jpg?alt=media&token=15676f70-6b23-4a4f-ace3-c97d5517f7d2',
 
   }, {
     name: 'Peanuts',
-    url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/images%2Fpeanuts.jpeg?alt=media&token=ccd3536c-cec0-4641-9685-593845fcb522'
+    url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/images%2Fpeanuts.jpeg?alt=media&token=ccd3536c-cec0-4641-9685-593845fcb522',
   }, {
     name: 'Pepsi',
-    url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/images%2Fpepsi.jpeg?alt=media&token=101fbc3e-7fa7-4579-a1dd-fd87c8044780'
+    url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/images%2Fpepsi.jpeg?alt=media&token=101fbc3e-7fa7-4579-a1dd-fd87c8044780',
   }, {
     name: 'Ray Ban',
-    url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/images%2Fray_ban.jpg?alt=media&token=65c9f096-c24c-44c3-b7e0-480a6938e740'
-  }
+    url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/images%2Fray_ban.jpg?alt=media&token=65c9f096-c24c-44c3-b7e0-480a6938e740',
+  },
 ];
 
 const VIDEOS_CREATIVES: ICreative[] = [
@@ -58,15 +62,15 @@ const VIDEOS_CREATIVES: ICreative[] = [
    },*/
   {
     name: 'Bud.TV',
-    url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/videos%2Fbud-tv.mp4?alt=media&token=28e72095-13da-416e-b13c-4f5cbbfee6d9'
+    url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/videos%2Fbud-tv.mp4?alt=media&token=28e72095-13da-416e-b13c-4f5cbbfee6d9',
   },
   {
     name: 'Captain Morgan',
-    url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/videos%2Fcaptain_morgan.mp4?alt=media&token=f5678986-7e10-42d4-89d8-c54d394836c9'
+    url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/videos%2Fcaptain_morgan.mp4?alt=media&token=f5678986-7e10-42d4-89d8-c54d394836c9',
   }, {
     name: 'Crazy kid',
-    url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/videos%2Fcrazy_kid.mp4?alt=media&token=b916272b-8b74-485e-bb42-e150e5d91a11'
-  }/*, {
+    url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/videos%2Fcrazy_kid.mp4?alt=media&token=b916272b-8b74-485e-bb42-e150e5d91a11',
+  },/*, {
    name: 'Ikea',
    url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/videos%2Fikea.mp4?alt=media&token=512402b7-07ca-4059-93c2-4256b6adcebe'
    }*//*, {
@@ -123,18 +127,22 @@ class AdDispatcher implements IAdDispatcher {
     return {
       type,
       creative,
-      coordinates: generateRandomCoordinate()
+      coordinates: generateRandomCoordinate(),
     };
   }
 
   private startEmissions(): void {
     of(null)
-        .expand(() => {
-          const randomDelay = 3000 + Math.round(Math.random() * 5000);
-          return of(this.getRandomAd())
-              .delay(randomDelay);
-        })
-        .take(20)
+        .pipe(
+            expand(() => {
+              const randomDelay = 3000 + Math.round(Math.random() * 5000);
+              return of(this.getRandomAd())
+                  .pipe(
+                      delay(randomDelay),
+                  );
+            }),
+            take(20),
+        )
         .subscribe((adEvent) => {
           this._adEvents$.next(adEvent);
         });
@@ -149,7 +157,7 @@ class AdDispatcher implements IAdDispatcher {
     return {
       removeListener: () => {
         sub.unsubscribe();
-      }
+      },
     };
   }
 }

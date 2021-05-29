@@ -1,40 +1,36 @@
 "use strict";
-var __spreadArrays = (this && this.__spreadArrays) || function () {
-    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
-    for (var r = Array(s), k = 0, i = 0; i < il; i++)
-        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
-            r[k] = a[j];
-    return r;
+var __spreadArray = (this && this.__spreadArray) || function (to, from) {
+    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
+        to[j] = from[i];
+    return to;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var Subject_1 = require("rxjs/Subject");
-var of_1 = require("rxjs/observable/of");
-require("rxjs/add/operator/expand");
-require("rxjs/add/operator/delay");
-require("rxjs/add/operator/take");
+exports.adDispatcher = void 0;
+var rxjs_1 = require("rxjs");
+var operators_1 = require("rxjs/operators");
 var IMAGE_CREATIVES = [
     {
         name: 'Bad breath',
-        url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/images%2Fbad-breath.jpeg?alt=media&token=3db2a043-49c9-45fb-86e9-f272659d8b35'
+        url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/images%2Fbad-breath.jpeg?alt=media&token=3db2a043-49c9-45fb-86e9-f272659d8b35',
     }, {
         name: 'Cepera',
-        url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/images%2Fcepera.jpg?alt=media&token=9abbe371-e37b-45f6-b951-a1aadce68f03'
+        url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/images%2Fcepera.jpg?alt=media&token=9abbe371-e37b-45f6-b951-a1aadce68f03',
     }, {
         name: 'Eat more chicken',
-        url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/images%2Feat_more_chicken.jpeg?alt=media&token=ce05f9a2-5727-4076-a5ab-2f64cef80979'
+        url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/images%2Feat_more_chicken.jpeg?alt=media&token=ce05f9a2-5727-4076-a5ab-2f64cef80979',
     }, {
         name: 'McDonal\'s',
-        url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/images%2Fmcdonalds.jpg?alt=media&token=15676f70-6b23-4a4f-ace3-c97d5517f7d2'
+        url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/images%2Fmcdonalds.jpg?alt=media&token=15676f70-6b23-4a4f-ace3-c97d5517f7d2',
     }, {
         name: 'Peanuts',
-        url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/images%2Fpeanuts.jpeg?alt=media&token=ccd3536c-cec0-4641-9685-593845fcb522'
+        url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/images%2Fpeanuts.jpeg?alt=media&token=ccd3536c-cec0-4641-9685-593845fcb522',
     }, {
         name: 'Pepsi',
-        url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/images%2Fpepsi.jpeg?alt=media&token=101fbc3e-7fa7-4579-a1dd-fd87c8044780'
+        url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/images%2Fpepsi.jpeg?alt=media&token=101fbc3e-7fa7-4579-a1dd-fd87c8044780',
     }, {
         name: 'Ray Ban',
-        url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/images%2Fray_ban.jpg?alt=media&token=65c9f096-c24c-44c3-b7e0-480a6938e740'
-    }
+        url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/images%2Fray_ban.jpg?alt=media&token=65c9f096-c24c-44c3-b7e0-480a6938e740',
+    },
 ];
 var VIDEOS_CREATIVES = [
     /*  {
@@ -43,15 +39,15 @@ var VIDEOS_CREATIVES = [
      },*/
     {
         name: 'Bud.TV',
-        url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/videos%2Fbud-tv.mp4?alt=media&token=28e72095-13da-416e-b13c-4f5cbbfee6d9'
+        url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/videos%2Fbud-tv.mp4?alt=media&token=28e72095-13da-416e-b13c-4f5cbbfee6d9',
     },
     {
         name: 'Captain Morgan',
-        url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/videos%2Fcaptain_morgan.mp4?alt=media&token=f5678986-7e10-42d4-89d8-c54d394836c9'
+        url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/videos%2Fcaptain_morgan.mp4?alt=media&token=f5678986-7e10-42d4-89d8-c54d394836c9',
     }, {
         name: 'Crazy kid',
-        url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/videos%2Fcrazy_kid.mp4?alt=media&token=b916272b-8b74-485e-bb42-e150e5d91a11'
-    } /*, {
+        url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/videos%2Fcrazy_kid.mp4?alt=media&token=b916272b-8b74-485e-bb42-e150e5d91a11',
+    }, /*, {
      name: 'Ikea',
      url: 'https://firebasestorage.googleapis.com/v0/b/ubimo-home-assignment.appspot.com/o/videos%2Fikea.mp4?alt=media&token=512402b7-07ca-4059-93c2-4256b6adcebe'
      }*/ /*, {
@@ -76,7 +72,7 @@ function raffleCreative(creativesArr) {
 }
 var AdDispatcher = /** @class */ (function () {
     function AdDispatcher() {
-        this._adEvents$ = new Subject_1.Subject();
+        this._adEvents$ = new rxjs_1.Subject();
         this.imagesCreatives = [];
         this.videoCreatives = [];
         this.adEvents$ = this._adEvents$.asObservable();
@@ -87,31 +83,30 @@ var AdDispatcher = /** @class */ (function () {
         var creative;
         if (type === 'IMAGE') {
             if (!this.imagesCreatives.length) {
-                this.imagesCreatives = __spreadArrays(IMAGE_CREATIVES);
+                this.imagesCreatives = __spreadArray([], IMAGE_CREATIVES);
             }
             creative = raffleCreative(this.imagesCreatives);
         }
         else {
             if (!this.videoCreatives.length) {
-                this.videoCreatives = __spreadArrays(VIDEOS_CREATIVES);
+                this.videoCreatives = __spreadArray([], VIDEOS_CREATIVES);
             }
             creative = raffleCreative(this.videoCreatives);
         }
         return {
             type: type,
             creative: creative,
-            coordinates: generateRandomCoordinate()
+            coordinates: generateRandomCoordinate(),
         };
     };
     AdDispatcher.prototype.startEmissions = function () {
         var _this = this;
-        of_1.of(null)
-            .expand(function () {
+        rxjs_1.of(null)
+            .pipe(operators_1.expand(function () {
             var randomDelay = 3000 + Math.round(Math.random() * 5000);
-            return of_1.of(_this.getRandomAd())
-                .delay(randomDelay);
-        })
-            .take(20)
+            return rxjs_1.of(_this.getRandomAd())
+                .pipe(operators_1.delay(randomDelay));
+        }), operators_1.take(20))
             .subscribe(function (adEvent) {
             _this._adEvents$.next(adEvent);
         });
@@ -124,7 +119,7 @@ var AdDispatcher = /** @class */ (function () {
         return {
             removeListener: function () {
                 sub.unsubscribe();
-            }
+            },
         };
     };
     return AdDispatcher;
