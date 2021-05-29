@@ -1,4 +1,4 @@
-# Ubimo front end home assignment
+# Ubimo front end/Full stack home assignment
 This library expose an Ad dispatcher service.
 
 ## Ad event interface:

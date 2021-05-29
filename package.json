@@ -1,24 +1,23 @@
 {
   "name": "ubimo-fed-home-assigment",
   "version": "1.0.0",
-  "description": "Front End Candidates home assigment",
+  "description": "Front End/Full stack Candidates home assigment",
   "main": "./dist/ad-dispatcher.js",
   "types": "./dist/ad-dispatcher.d.ts",
   "author": "Ubimo",
   "license": "MIT",
   "private": false,
   "dependencies": {
-    "rxjs": "^6.2.2",
-    "rxjs-compat": "^6.2.2"
+    "rxjs": "^7.1.0"
   },
   "devDependencies": {
-    "clean-webpack-plugin": "^3.0.0",
-    "html-webpack-plugin": "^3.2.0",
-    "ts-loader": "^6.0.4",
-    "typescript": "^3.6.2",
-    "webpack": "^4.39.3",
-    "webpack-cli": "^3.3.8",
-    "webpack-dev-server": "^3.8.0"
+    "clean-webpack-plugin": "^4.0.0-alpha.0",
+    "html-webpack-plugin": "^5.3.1",
+    "ts-loader": "^9.2.2",
+    "typescript": "^4.3.2",
+    "webpack": "^5.38.1",
+    "webpack-cli": "^4.7.0",
+    "webpack-dev-server": "^3.11.2"
   },
   "scripts": {
     "build": "tsc -p .",
